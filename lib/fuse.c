@@ -3027,6 +3027,8 @@ static void fuse_do_release(struct fuse *f, fuse_ino_t ino, const char *path,
 	}
 	pthread_mutex_unlock(&f->lock);
 
+	do_forget(f, ino, 1);
+
 	if(unlink_hidden) {
 		if (path) {
 			fuse_fs_unlink(f->fs, path);
